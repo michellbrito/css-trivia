@@ -1,0 +1,25 @@
+{
+  "name": "css-trivia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michellbrito/css-trivia.git"
+  },
+  "author": "Michell Brito",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michellbrito/css-trivia/issues"
+  },
+  "homepage": "https://github.com/michellbrito/css-trivia#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "prisma": "^5.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
