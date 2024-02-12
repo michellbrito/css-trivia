@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id               Int                 @id @default(autoincrement())
+  first_name       String
+  last_name        String
+  username         String              @unique
+  email            String              @unique
+  password         String
+  created_at       DateTime
+  logged_in_at     DateTime?
+  TriviaSubmission TriviaSubmissions[]
+
+  @@map(name: "users")
+}
+
+model TriviaTopics {
+  id           Int             @id @default(autoincrement())
+  topic_name   String
+  TriviaOption TriviaOptions[]
+
+  @@map(name: "trivia_topics")
+}
+
+model TriviaSubmissions {
+  id                     Int                       @id @default(autoincrement())
+  user                   Users                     @relation(fields: [user_id], references: [id])
+  user_id                Int
+  trivia_question        TriviaQuestions           @relation(fields: [trivia_question_id], references: [id])
+  trivia_question_id     Int
+  created_at             DateTime
+  score                  Int
+  TriviaSubmissionOption TriviaSubmissionOptions[]
+
+  @@map(name: "trivia_submissions")
+}
+
+model TriviaSubmissionOptions {
+  id                   Int               @id @default(autoincrement())
+  trivia_submission    TriviaSubmissions @relation(fields: [trivia_submission_id], references: [id])
+  trivia_submission_id Int
+  trivia_option        TriviaOptions     @relation(fields: [trivia_option_id], references: [id])
+  trivia_option_id     Int
+
+  @@map(name: "trivia_submission_options")
+}
+
+model TriviaQuestions {
+  id               Int                 @id @default(autoincrement())
+  question_text    String
+  TriviaSubmission TriviaSubmissions[]
+  TriviaOption     TriviaOptions[]
+
+  @@map(name: "trivia_questions")
+}
+
+model TriviaOptions {
+  id                     Int                       @id @default(autoincrement())
+  trivia_question        TriviaQuestions           @relation(fields: [trivia_question_id], references: [id])
+  trivia_question_id     Int
+  option_text            String
+  is_correct             Boolean
+  trivia_topic           TriviaTopics              @relation(fields: [trivia_topic_id], references: [id])
+  trivia_topic_id        Int
+  TriviaSubmissionOption TriviaSubmissionOptions[]
+
+  @@map(name: "trivia_options")
+}
