@@ -20,15 +20,15 @@ router.post('/add', async (req, res) => {
         created_at: new Date()
       }
     })
-    for (let i = 0; i < submissionOptions.length; i++) {
+    submissionOptions.forEach(async ({ trivia_option_id, trivia_question_id }) => {
       await triviaSubmissionOptions.create({
         data: {
           trivia_submission_id: id,
-          trivia_option_id: submissionOptions[i].trivia_option_id,
-          trivia_question_id: submissionOptions[i].trivia_question_id
+          trivia_option_id,
+          trivia_question_id
         }
       })
-    }
+    })
     res.status(200).json({ message: 'Added to leaderboard successfully' })
   } catch (err) {
     console.error(err)
