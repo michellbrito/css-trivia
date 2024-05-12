@@ -8,14 +8,16 @@ require('dotenv').config()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(session({
+app.use(
+  session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 10800 // 3 years
+      maxAge: 10800 // 3 years
     }
-}));
+  })
+)
 app.use('/api', routes)
 
 app.listen(PORT, () => console.log(`Server Running On PORT: ${PORT}`))
