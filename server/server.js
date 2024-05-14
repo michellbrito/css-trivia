@@ -1,4 +1,4 @@
-const path = require('path')
+const cors = require('cors')
 const express = require('express')
 const session = require('express-session')
 const routes = require('./controllers')
@@ -8,6 +8,11 @@ require('dotenv').config()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(
+  cors({
+    origin: 'http://localhost:5173'
+  })
+)
 app.use(
   session({
     secret: process.env.SESSION_SECRET,

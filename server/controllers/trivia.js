@@ -4,8 +4,7 @@ const { triviaTopics, triviaOptions } = new PrismaClient()
 
 router.get('/topics', async (req, res) => {
   try {
-    const allTriviaTopics = await triviaTopics.findMany({
-    })
+    const allTriviaTopics = await triviaTopics.findMany({})
     res.status(200).json(allTriviaTopics)
   } catch (err) {
     console.error(err)
