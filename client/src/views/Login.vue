@@ -110,14 +110,14 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100vh;
+  justify-content: center;
 }
 
 h2 {
+  color: #7e57c2;
   margin-bottom: 15px;
   text-align: center;
-  color: #7e57c2;
 }
 
 .login-container {
@@ -137,8 +137,8 @@ h2 {
 }
 
 .link {
-  text-decoration: none;
   color: #7e57c2;
+  text-decoration: none;
 }
 
 .link:hover {
